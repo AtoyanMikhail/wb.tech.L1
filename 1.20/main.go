@@ -2,26 +2,19 @@ package main
 
 import (
 	"fmt"
+	"slices"
 )
-
-func reverseRunes(runes []rune, left, right int) {
-	for left < right {
-		runes[left], runes[right] = runes[right], runes[left]
-		left++
-		right--
-	}
-}
 
 func reverseWordsInPlace(s string) string {
 	runes := []rune(s)
 	n := len(runes)
 
-	reverseRunes(runes, 0, n-1)
+	slices.Reverse(runes)
 
 	start := 0
 	for i := 0; i <= n; i++ {
 		if i == n || runes[i] == ' ' {
-			reverseRunes(runes, start, i-1)
+			slices.Reverse(runes[start:i])
 			start = i + 1
 		}
 	}
